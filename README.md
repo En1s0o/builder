@@ -4,13 +4,48 @@
 
 ## builder
 
-提交构建基本编译环境的构建脚本。
+用于构建基本编译环境的构建脚本。
+
+```shell
+cd builder
+sudo docker build -t eniso/builder .
+```
+
+基本编译环境的构建时常因网络原因而失败（尽管使用了镜像站），这并非是构建脚本的问题。这里提供已经构建好的镜像包下载 https://pan.baidu.com/s/1xTJDUfm7bNm7vionkuyBgg。
+
+1. 解压 builder.rar 得到 builder.tar
+
+2. 载入 builder.tar
+
+   ```shell
+   sudo docker load -i builder.tar
+   ```
+
+
+
+**给喜欢折腾的同学**
+
+ubuntu:18.04 镜像 pull 不下来？可以先通过镜像站下载，再下载官方的，例如：
+
+```shell
+sudo docker pull daocloud.io/ubuntu:18.04
+sudo docker pull ubuntu:18.04
+```
 
 
 
 ## chromium-builder
 
 在 **builder** 的基础上，添加 **java** 和 **depot_tools**，使其满足 chromium 的编译，也适用于编译 Android 系统。
+
+```shell
+cd chromium-builder
+sudo docker build -t chromium-builder .
+```
+
+
+
+在使用 **depot_tools** 时，有一点必须要了解：最新版本的 **depot_tools** 可能无法下载较早版本的 **chromium** 源码，如果遇到这类问题，请降低 **depot_tools** 的版本（**修改 Dockerfile 中的 commit id**）。
 
 > **温馨提示：**
 >
