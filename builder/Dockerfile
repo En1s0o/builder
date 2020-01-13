@@ -2,7 +2,7 @@ FROM ubuntu:18.04
 MAINTAINER Eniso <eniso-92@qq.com>
 
 # 去除所有本地化的设置
-ENV LC_ALL C
+RUN echo -e "\r\nexport LC_ALL=C\r\n" >> /etc/profile
 
 # 更换源
 RUN apt-get clean && apt-get autoremove -y && rm -rf /var/lib/{apt,dpkg,cache,log} /tmp/* /var/tmp/* && \
@@ -27,7 +27,7 @@ RUN rm /usr/bin/gcc /usr/bin/g++; ln -s /usr/bin/gcc-4.8 /usr/bin/gcc; ln -s /us
 RUN git config --global user.mame "Eniso" && git config --global user.email "eniso-92@qq.com"
 
 # 自动补全
-RUN echo ". /usr/share/bash-completion/bash_completion" >> ~/.bashrc
+RUN echo -e "\r\n. /usr/share/bash-completion/bash_completion\r\n" >> ~/.bashrc
 
 # 配置时区、静默安装等
 RUN echo Asia/Shanghai > /etc/timezone && \
