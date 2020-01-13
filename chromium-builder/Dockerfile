@@ -1,6 +1,10 @@
 FROM eniso/builder:latest
 MAINTAINER Eniso <eniso-92@qq.com>
 
+ARG JDK_VERSION=jdk1.6.0_45
+#ARG JDK_VERSION=jdk1.7.0_80
+#ARG JDK_VERSION=jdk1.8.0_231
+
 # 安装 Java
 # JDK 6
 WORKDIR /opt
@@ -10,11 +14,8 @@ RUN /opt/jdk-6u45-linux-x64.bin && rm -f /opt/jdk-6u45-linux-x64.bin
 ADD jdk-7u80-linux-x64.tar.gz /opt
 # JDK 8
 ADD jdk-8u231-linux-x64.tar.gz /opt
-# 配置 JDK 默认版本
-RUN ln -s /opt/jdk1.6.0_45 /opt/jdk
-#RUN ln -s /opt/jdk1.7.0_80 /opt/jdk
-#RUN ln -s /opt/jdk1.8.0_231 /opt/jdk
-RUN echo -e "\r\nexport JAVA_HOME=/opt/jdk\r\nexport JRE_HOME=$JAVA_HOME/jre\r\nexport PATH=$JAVA_HOME/bin:$PATH\r\n" > /etc/profile
+# 配置 JDK
+RUN ln -s /opt/${JDK_VERSION} /opt/jdk && echo -e "\r\nexport JAVA_HOME=/opt/jdk\r\nexport JRE_HOME=$JAVA_HOME/jre\r\nexport PATH=$JAVA_HOME/bin:$PATH\r\n" > /etc/profile
 
 # 安装 depot_tools，禁止 depot_tools 自动更新
 # git clone https://chromium.googlesource.com/chromium/tools/depot_tools

@@ -1,6 +1,9 @@
 FROM ubuntu:18.04
 MAINTAINER Eniso <eniso-92@qq.com>
 
+ARG GIT_USER_NAME=Eniso
+ARG GIT_USER_EMAIL=eniso-92@qq.com
+
 # 去除所有本地化的设置
 RUN echo -e "\r\nexport LC_ALL=C\r\n" >> /etc/profile
 
@@ -24,7 +27,7 @@ RUN apt-get update -y && \
 RUN rm /usr/bin/gcc /usr/bin/g++; ln -s /usr/bin/gcc-4.8 /usr/bin/gcc; ln -s /usr/bin/g++-4.8 /usr/bin/g++
 
 # 配置 git
-RUN git config --global user.mame "Eniso" && git config --global user.email "eniso-92@qq.com"
+RUN git config --global user.mame "${GIT_USER_NAME}" && git config --global user.email "${GIT_USER_EMAIL}"
 
 # 自动补全
 RUN echo -e "\r\n. /usr/share/bash-completion/bash_completion\r\n" >> ~/.bashrc
