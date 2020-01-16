@@ -35,4 +35,3 @@ RUN cd /opt/depot_tools && \
 # 工作目录
 WORKDIR /home
 
-CMD ["/bin/bash"]
