@@ -15,7 +15,7 @@ ADD jdk-7u80-linux-x64.tar.gz /opt
 # JDK 8
 ADD jdk-8u231-linux-x64.tar.gz /opt
 # 配置 JDK
-RUN ln -s /opt/${JDK_VERSION} /opt/jdk && sh -c '/bin/echo -e "\nexport JAVA_HOME=/opt/jdk\nexport JRE_HOME=\$JAVA_HOME/jre\nexport PATH=\$JAVA_HOME/bin:\$PATH" >> /etc/profile'
+RUN ln -s /opt/${JDK_VERSION} /opt/jdk && sh -c '/bin/echo -e "\nexport JAVA_HOME=/opt/jdk\nexport JRE_HOME=\$JAVA_HOME/jre\nexport PATH=\$JAVA_HOME/bin:\$PATH" >> ~/.bashrc'
 
 # 安装 depot_tools，禁止 depot_tools 自动更新
 # git clone https://chromium.googlesource.com/chromium/tools/depot_tools
@@ -30,7 +30,7 @@ RUN ln -s /opt/${JDK_VERSION} /opt/jdk && sh -c '/bin/echo -e "\nexport JAVA_HOM
 ADD depot_tools.tar.gz /opt
 RUN cd /opt/depot_tools && \
     git checkout 0bbe6fa00ef873080c4f6d145ea7a00497eeed3f && \
-    sh -c '/bin/echo -e "\nexport DEPOT_TOOLS_UPDATE=0\nexport PATH=/opt/depot_tools:\$PATH" >> /etc/profile'
+    sh -c '/bin/echo -e "\nexport DEPOT_TOOLS_UPDATE=0\nexport PATH=/opt/depot_tools:\$PATH" >> ~/.bashrc'
 
 # 工作目录
 WORKDIR /home

@@ -5,7 +5,7 @@ ARG GIT_USER_NAME=Eniso
 ARG GIT_USER_EMAIL=eniso-92@qq.com
 
 # 去除所有本地化的设置
-RUN sh -c '/bin/echo -e "\nexport LC_ALL=C" >> /etc/profile'
+RUN sh -c '/bin/echo -e "\nexport LC_ALL=C" >> ~/.bashrc'
 
 # 更换源
 RUN apt-get clean && apt-get autoremove -y && rm -rf /var/lib/{apt,dpkg,cache,log} /tmp/* /var/tmp/* && \
