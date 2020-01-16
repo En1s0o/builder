@@ -5,7 +5,7 @@ ARG GIT_USER_NAME=Eniso
 ARG GIT_USER_EMAIL=eniso-92@qq.com
 
 # 去除所有本地化的设置
-RUN echo -e "\r\nexport LC_ALL=C\r\n" >> /etc/profile
+RUN sh -c '/bin/echo -e "\nexport LC_ALL=C" >> /etc/profile'
 
 # 更换源
 RUN apt-get clean && apt-get autoremove -y && rm -rf /var/lib/{apt,dpkg,cache,log} /tmp/* /var/tmp/* && \
@@ -30,7 +30,7 @@ RUN rm /usr/bin/gcc /usr/bin/g++; ln -s /usr/bin/gcc-4.8 /usr/bin/gcc; ln -s /us
 RUN git config --global user.mame "${GIT_USER_NAME}" && git config --global user.email "${GIT_USER_EMAIL}"
 
 # 自动补全
-RUN echo -e "\r\n. /usr/share/bash-completion/bash_completion\r\n" >> ~/.bashrc
+RUN sh -c '/bin/echo -e "\n. /usr/share/bash-completion/bash_completion" >> ~/.bashrc'
 
 # 配置时区、静默安装等
 RUN echo Asia/Shanghai > /etc/timezone && \
