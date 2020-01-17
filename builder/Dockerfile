@@ -17,7 +17,7 @@ RUN apt-get clean && apt-get autoremove -y && rm -rf /var/lib/{apt,dpkg,cache,lo
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update -y && \
     apt-get install -y --fix-missing \
-        sudo lsb-base lsb-release apt-utils bash-completion busybox vim python gcc-4.8 g++-4.8 \
+        sudo lsb-base lsb-release apt-utils bash-completion busybox vim pigz python gcc-4.8 g++-4.8 \
         git git-core subversion gnupg flex bison gperf build-essential m4 ccache zip curl wget \
         zlib1g-dev gcc-multilib g++-multilib libc6-dev \
         lib32ncurses5-dev x11proto-core-dev libx11-dev lib32z-dev libgl1-mesa-dev libxml2-utils xsltproc \
@@ -49,6 +49,8 @@ RUN apt-get clean && apt-get autoremove -y && rm -rf /var/lib/{apt,dpkg,cache,lo
 
 # 替换 make 为 3.81 版本（Android 4.4.2 等系统会校验 make 的版本 3.81 或 3.82，而 3.81 比较保险）
 COPY make /usr/bin/make
+# 添加 repo
+COPY repo /usr/bin/repo
 
 # 启动一个文件浏览器（用户名/密码：admin/admin），方便文件传输
 COPY filebrowser /usr/local/bin

@@ -23,10 +23,6 @@ RUN ln -s /opt/${JDK_VERSION} /opt/jdk && sh -c '/bin/echo -e "\nexport JAVA_HOM
 # 2018/1 dbc809fcd3be3d9a39b77af038bbcdcc3db25e2f
 # 2017/3 0bbe6fa00ef873080c4f6d145ea7a00497eeed3f
 # 2016/2 dbb6f8246b47bbf47848618d7ae089f9233d0171
-
-# 安装 repo
-
-# 安装 depot_tools
 ADD depot_tools.tar.gz /opt
 RUN cd /opt/depot_tools && \
     git checkout 0bbe6fa00ef873080c4f6d145ea7a00497eeed3f && \
