@@ -52,6 +52,9 @@ COPY make /usr/bin/make
 # 添加 repo
 COPY repo /usr/bin/repo
 
+# 工作目录
+WORKDIR /home
+
 # 启动一个文件浏览器（用户名/密码：admin/admin），方便文件传输
 COPY filebrowser /usr/local/bin
 RUN chmod +x /usr/local/bin/filebrowser
