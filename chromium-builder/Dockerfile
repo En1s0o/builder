@@ -28,6 +28,16 @@ RUN cd /opt/depot_tools && \
     git checkout 0bbe6fa00ef873080c4f6d145ea7a00497eeed3f && \
     sh -c '/bin/echo -e "\nexport DEPOT_TOOLS_UPDATE=0\nexport PATH=/opt/depot_tools:\$PATH" >> ~/.bashrc'
 
+# 如果需要用到 gcc-linaro 编译链（例如：Amlogic Android 系统源码用到）
+# 一定要注意 gcc-linaro 的版本，下面是本人测试成功的版本
+# https://releases.linaro.org/archive/14.09/components/toolchain/binaries/gcc-linaro-aarch64-linux-gnu-4.9-2014.09_linux.tar.xz
+ADD gcc-linaro-aarch64-linux-gnu-4.9-2014.09_linux.tar.xz /opt
+RUN sh -c '/bin/echo -e "\nexport PATH=/opt/gcc-linaro-aarch64-linux-gnu-4.9-2014.09_linux/bin:\$PATH" >> ~/.bashrc'
+
+# 如果需要用到特定的编译链，可以自行添加，例如：
+# 1. 海思 MV100 编译链，一般都内置在工程代码里面了，根据说明文档配置即可
+# 2. 海思 MV300 编译链，在 source 之后就会自动配置好了
+
 # 工作目录
 WORKDIR /home
 
